@@ -1,8 +1,7 @@
-// 
-
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import clickSoundFile from "./sounds/click.mp3";
+import clickSoundCompFile from "./sounds/clickComp.mp3";
 import startSoundFile from "./sounds/start.mp3";
 import winSoundFile from "./sounds/win.mp3";
 import drawSoundFile from "./sounds/draw.mp3";
@@ -15,6 +14,7 @@ export default function App() {
   const [mode, setMode] = useState("single");
 
   const clickSound = useRef(new Audio(clickSoundFile));
+  const clickSoundComp = useRef(new Audio(clickSoundCompFile));
   const startSound = useRef(new Audio(startSoundFile));
   const winSound = useRef(new Audio(winSoundFile));
   const drawSound = useRef(new Audio(drawSoundFile));
@@ -25,12 +25,23 @@ export default function App() {
     [0, 4, 8], [2, 4, 6],
   ];
 
+  // Play start sound on first load
+  useEffect(() => {
+    startSound.current.play();
+  }, []);
+
+  // Check winner after every board change
   useEffect(() => {
     checkWinner();
+  }, [board]);
+
+  // Let computer move only when it's computer's turn and game not over
+  useEffect(() => {
     if (mode === "single" && !isXNext && !winner && !gameOver) {
-      setTimeout(computerMove, 500);
+      const timeoutId = setTimeout(computerMove, 500);
+      return () => clearTimeout(timeoutId); // Cleanup
     }
-  }, [board, isXNext]);
+  }, [isXNext, winner, gameOver, mode]);
 
   const handleClick = (index) => {
     if (board[index] || winner || (mode === "single" && !isXNext)) return;
@@ -46,7 +57,7 @@ export default function App() {
       .map((val, idx) => (val === null ? idx : null))
       .filter((val) => val !== null);
     if (emptyIndices.length === 0) return;
-
+    clickSoundComp.current.play();
     const randomIndex = Math.floor(Math.random() * emptyIndices.length);
     const newBoard = [...board];
     newBoard[emptyIndices[randomIndex]] = "O";
@@ -77,7 +88,6 @@ export default function App() {
     setIsXNext(true);
     setWinner(null);
     setGameOver(false);
-    startSound.current.play();
   };
 
   const renderCell = (index) => (
@@ -89,10 +99,6 @@ export default function App() {
       {board[index]}
     </button>
   );
-
-  useEffect(()=>{
-    startSound.current.play();
-  },[]);
 
   return (
     <div className="container">
@@ -142,7 +148,9 @@ export default function App() {
         ))}
       </div>
 
-      <button className="reset" onClick={resetGame} title="Reset Game">Reset Game</button>
+      <button className="reset" onClick={resetGame} title="Reset Game">
+        Reset Game
+      </button>
 
       {gameOver && (
         <div className="modal-overlay">
