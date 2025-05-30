@@ -3,8 +3,8 @@
   "name": "Tic Tac Toe Game",
   "icons": [
     {
-      "src": "icon-192x192.png",
-      "type": "image/png",
+      "src": "vite.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
