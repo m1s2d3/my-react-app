@@ -350,4 +350,10 @@ footer img:hover {
   border: 2px solid #fff;
 }
 
+.app-icon {
+  border-radius: 24px;
+  width: 12rem;
+  height: 12rem;
+}
+
   
