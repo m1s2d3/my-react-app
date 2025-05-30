@@ -27,12 +27,6 @@ export default function App() {
   ];
 
   useEffect(() => {
-    if (showSplash) {
-      startSound.current.play().catch(() => {});
-    }
-  }, [showSplash])
-
-  useEffect(() => {
     checkWinner();
   }, [board]);
 
@@ -105,7 +99,10 @@ export default function App() {
       <div className="splash-screen">
         <h1 className="splash-title">Tic Tac Toe</h1>
         <p className="splash-subtitle">Let's play and have fun!</p>
-        <button className="splash-btn" onClick={() => setShowSplash(false)}>
+        <button className="splash-btn" onClick={() => {
+          startSound.current.play().catch(() => {});
+          setShowSplash(false)
+          }}>
           Start Game
         </button>
       </div>
