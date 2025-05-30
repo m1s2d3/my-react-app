@@ -124,11 +124,7 @@ export default function App() {
 
           <div className="splash-footer">
             <div className="created-by">
-              <p>Created by <strong>Mohd Shamshad</strong></p><img
-                src="../public/icon-developer.png"
-                alt="Developer"
-                className="mini-avatar"
-              />
+              <p>Created by <strong>Mohd Shamshad</strong></p><img src="/icon-developer.png" alt="Developer" className="mini-avatar" />
             </div>
             <p>© 2025 Powered by creativity and code.</p>
           </div>
