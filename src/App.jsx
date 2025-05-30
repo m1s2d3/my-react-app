@@ -1,22 +1,28 @@
-import { useState, useEffect } from "react";
+// 
+
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
+import clickSoundFile from "./sounds/click.mp3";
+import startSoundFile from "./sounds/start.mp3";
+import winSoundFile from "./sounds/win.mp3";
+import drawSoundFile from "./sounds/draw.mp3";
 
 export default function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [mode, setMode] = useState("single"); // single or multiplayer
+  const [mode, setMode] = useState("single");
+
+  const clickSound = useRef(new Audio(clickSoundFile));
+  const startSound = useRef(new Audio(startSoundFile));
+  const winSound = useRef(new Audio(winSoundFile));
+  const drawSound = useRef(new Audio(drawSoundFile));
 
   const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6],
   ];
 
   useEffect(() => {
@@ -27,7 +33,8 @@ export default function App() {
   }, [board, isXNext]);
 
   const handleClick = (index) => {
-    if (board[index] || winner) return;
+    if (board[index] || winner || (mode === "single" && !isXNext)) return;
+    clickSound.current.play();
     const newBoard = [...board];
     newBoard[index] = isXNext ? "X" : "O";
     setBoard(newBoard);
@@ -53,6 +60,7 @@ export default function App() {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
         setGameOver(true);
+        winSound.current.play();
         return;
       }
     }
@@ -60,6 +68,7 @@ export default function App() {
     if (!board.includes(null)) {
       setWinner("Draw");
       setGameOver(true);
+      drawSound.current.play();
     }
   };
 
@@ -68,6 +77,7 @@ export default function App() {
     setIsXNext(true);
     setWinner(null);
     setGameOver(false);
+    startSound.current.play();
   };
 
   const renderCell = (index) => (
@@ -80,6 +90,10 @@ export default function App() {
     </button>
   );
 
+  useEffect(()=>{
+    startSound.current.play();
+  },[]);
+
   return (
     <div className="container">
       <header className="header">
@@ -89,13 +103,19 @@ export default function App() {
 
       <div className="mode-toggle">
         <button
-          onClick={() => setMode("single")}
+          onClick={() => {
+            setMode("single");
+            resetGame();
+          }}
           className={mode === "single" ? "mode active" : "mode"}
         >
           Single Player
         </button>
         <button
-          onClick={() => setMode("multi")}
+          onClick={() => {
+            setMode("multi");
+            resetGame();
+          }}
           className={mode === "multi" ? "mode active" : "mode"}
         >
           Multiplayer
@@ -122,9 +142,18 @@ export default function App() {
         ))}
       </div>
 
-      <button className="reset" onClick={resetGame}>
-        {winner ? "Play Again" : "Reset Game"}
-      </button>
+      <button className="reset" onClick={resetGame} title="Reset Game">Reset Game</button>
+
+      {gameOver && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>{winner === "Draw" ? "It's a Draw!" : `${winner} Wins! 🎉`}</h2>
+            <button className="play" onClick={resetGame}>
+              Play Again
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
