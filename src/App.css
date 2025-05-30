@@ -1,15 +1,15 @@
 /* App.css */
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom right, #e0e7ff, #f3e8ff, #ffe4e6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #e0e7ff, #f3e8ff, #ffe4e6);
+  display: flex;
+  justify-content: center;
+  /* align-items: center;  <-- is line ko REMOVE kar do */
+  min-height: 100vh;
+}
   
   .app-container {
     text-align: center;
