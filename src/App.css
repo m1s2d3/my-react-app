@@ -7,7 +7,7 @@ body {
   background: linear-gradient(to bottom right, #e0e7ff, #f3e8ff, #ffe4e6);
   display: flex;
   justify-content: center;
-  /* align-items: center;  <-- is line ko REMOVE kar do */
+  align-items: center;
   min-height: 100vh;
 }
   
