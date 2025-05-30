@@ -44,8 +44,8 @@ export default function App() {
   }, [isXNext, winner, gameOver, mode]);
 
   const handleClick = (index) => {
-    if (board[index] || winner || (mode === "single" && !isXNext)) return;
     clickSound.current.play();
+    if (board[index] || winner || (mode === "single" && !isXNext)) return;
     const newBoard = [...board];
     newBoard[index] = isXNext ? "X" : "O";
     setBoard(newBoard);
