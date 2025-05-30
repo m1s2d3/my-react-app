@@ -27,8 +27,10 @@ export default function App() {
   ];
 
   useEffect(() => {
-    startSound.current.play();
-  }, []);
+    if(showSplash){
+      startSound.current.play();
+    }
+  }, [showSplash]);
 
   useEffect(() => {
     checkWinner();
