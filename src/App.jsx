@@ -100,7 +100,7 @@ export default function App() {
       <div className="splash-content">
         <div className="text-section">
           <h1 className="splash-title">Tic Tac Toe</h1><img
-            src="../public/app-icon.png"
+            src="/app-icon.png"
             alt="game-icon"
             className="app-icon"
           />
@@ -119,7 +119,7 @@ export default function App() {
           <div className="splash-footer">
             <div className="created-by">
               <p>Created by <strong>Mohd Shamshad</strong></p><img
-                src="../public/icon-developer.png"
+                src="/icon-developer.png"
                 alt="Developer"
                 className="mini-avatar"
               />
