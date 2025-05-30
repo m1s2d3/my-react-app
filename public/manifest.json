@@ -3,14 +3,9 @@
   "name": "Tic Tac Toe Game",
   "icons": [
     {
-      "src": "vite.svg",
-      "type": "image/svg",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon-512x512.png",
+      "src": "icon-192.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
