@@ -16,6 +16,11 @@ export default defineConfig({
             src: 'icon-192.png',
             type: 'image/png',
             sizes: '192x192',
+          },
+          {
+            "src": "icon-developer.png",
+            "type": "image/png",
+            "sizes": "192x192"
           }
         ],
         start_url: '.',
