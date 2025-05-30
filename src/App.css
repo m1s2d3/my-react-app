@@ -1,42 +1,116 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* App.css */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #e0e7ff, #f3e8ff, #ffe4e6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .app-container {
+    text-align: center;
+    padding: 20px;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  
+  h1 {
+    font-size: 3rem;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+  
+  .mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .mode-buttons button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: 2px solid #6366f1;
+    background-color: white;
+    color: #6366f1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .mode-buttons button.active {
+    background-color: #6366f1;
+    color: white;
+  }
+  
+  .status {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #4b5563;
+  }
+  
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .cell {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 2.5rem;
+    color: #4f46e5;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .cell:hover {
+    transform: scale(1.05);
+  }
+  
+  .cell:disabled {
+    cursor: not-allowed;
+  }
+  
+  .reset-btn {
+    padding: 10px 25px;
+    font-weight: 600;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    transition: transform 0.2s ease;
+  }
+  
+  .reset-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  footer {
+    margin-top: 40px;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  footer img {
+    width: 60px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
