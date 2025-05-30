@@ -38,7 +38,7 @@ export default function App() {
   // Let computer move only when it's computer's turn and game not over
   useEffect(() => {
     if (mode === "single" && !isXNext && !winner && !gameOver) {
-      const timeoutId = setTimeout(computerMove, 500);
+      const timeoutId = setTimeout(computerMove, 1000);
       return () => clearTimeout(timeoutId); // Cleanup
     }
   }, [isXNext, winner, gameOver, mode]);
