@@ -12,7 +12,7 @@ export default function App() {
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [mode, setMode] = useState("single");
-  const [showSplash, setShowSplash] = useState(true); // splash state
+  const [showSplash, setShowSplash] = useState(true);
 
   const clickSound = useRef(new Audio(clickSoundFile));
   const clickSoundComp = useRef(new Audio(clickSoundCompFile));
@@ -96,16 +96,45 @@ export default function App() {
 
   if (showSplash) {
     return (
+      // <div className="splash-screen">
+      //   <h1 className="splash-title">Tic Tac Toe</h1>
+      //   <p className="splash-subtitle">Let's play and have fun!</p>
+      //   <button className="splash-btn" onClick={() => {
+      //     startSound.current.play().catch(() => {});
+      //     setShowSplash(false)
+      //     }}>
+      //     Start Game
+      //   </button>
+      // </div>
       <div className="splash-screen">
-        <h1 className="splash-title">Tic Tac Toe</h1>
-        <p className="splash-subtitle">Let's play and have fun!</p>
-        <button className="splash-btn" onClick={() => {
-          startSound.current.play().catch(() => {});
-          setShowSplash(false)
-          }}>
-          Start Game
-        </button>
+      <div className="splash-content">
+        <div className="text-section">
+          <h1 className="splash-title">Tic Tac Toe</h1>
+          <p className="splash-subtitle">Let's play and have fun!</p>
+
+          <button
+            className="splash-btn"
+            onClick={() => {
+              startSound.current.play().catch(() => {});
+              setShowSplash(false);
+            }}
+          >
+            Start Game
+          </button>
+
+          <div className="splash-footer">
+            <div className="created-by">
+              <p>Created by <strong>Mohd Shamshad</strong></p><img
+                src="../public/icon-developer.png"
+                alt="Developer"
+                className="mini-avatar"
+              />
+            </div>
+            <p>© 2025 Powered by creativity and code.</p>
+          </div>
+        </div>
       </div>
+    </div>
     );
   }
 
