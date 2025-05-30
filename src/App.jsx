@@ -26,11 +26,11 @@ export default function App() {
     [0, 4, 8], [2, 4, 6],
   ];
 
-  // useEffect(() => {
-  //   if(showSplash){
-  //     startSound.current.play();
-  //   }
-  // }, [showSplash]);
+  useEffect(() => {
+    if (showSplash) {
+      startSound.current.play().catch(() => {});
+    }
+  }, [showSplash])
 
   useEffect(() => {
     checkWinner();
@@ -101,7 +101,6 @@ export default function App() {
   );
 
   if (showSplash) {
-    startSound.current.play();
     return (
       <div className="splash-screen">
         <h1 className="splash-title">Tic Tac Toe</h1>
