@@ -7,7 +7,7 @@ body {
   background: linear-gradient(to bottom right, #e0e7ff, #f3e8ff, #ffe4e6);
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center;  <-- is line ko REMOVE kar do */
   min-height: 100vh;
 }
   
@@ -325,6 +325,29 @@ footer img:hover {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+
+.splash-footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.created-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mini-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
 }
 
   
