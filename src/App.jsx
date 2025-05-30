@@ -99,12 +99,11 @@ export default function App() {
       <div className="splash-screen">
       <div className="splash-content">
         <div className="text-section">
-          <h1 className="splash-title">Tic Tac Toe</h1>
-          <img
-                src="../public/icon-192.png"
-                alt="App"
-                className="app-icon"
-              />
+          <h1 className="splash-title">Tic Tac Toe</h1><img
+            src="../public/app-icon.png"
+            alt="game-icon"
+            className="app-icon"
+          />
           <p className="splash-subtitle">Let's play and have fun!</p>
 
           <button
