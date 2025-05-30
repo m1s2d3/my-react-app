@@ -275,3 +275,56 @@ footer img:hover {
     opacity: 1;
   }
 }
+
+/* Splash Screen */
+.splash-screen {
+  width:23rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #e0e7ff, #ffe4e6);
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.splash-title {
+  font-size: 3rem;
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+
+.splash-subtitle {
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.splash-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.splash-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+  
