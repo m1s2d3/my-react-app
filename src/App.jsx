@@ -96,20 +96,15 @@ export default function App() {
 
   if (showSplash) {
     return (
-      // <div className="splash-screen">
-      //   <h1 className="splash-title">Tic Tac Toe</h1>
-      //   <p className="splash-subtitle">Let's play and have fun!</p>
-      //   <button className="splash-btn" onClick={() => {
-      //     startSound.current.play().catch(() => {});
-      //     setShowSplash(false)
-      //     }}>
-      //     Start Game
-      //   </button>
-      // </div>
       <div className="splash-screen">
       <div className="splash-content">
         <div className="text-section">
           <h1 className="splash-title">Tic Tac Toe</h1>
+          <img
+                src="../public/icon-192.png"
+                alt="App"
+                className="app-icon"
+              />
           <p className="splash-subtitle">Let's play and have fun!</p>
 
           <button
@@ -124,7 +119,11 @@ export default function App() {
 
           <div className="splash-footer">
             <div className="created-by">
-              <p>Created by <strong>Mohd Shamshad</strong></p><img src="/icon-developer.png" alt="Developer" className="mini-avatar" />
+              <p>Created by <strong>Mohd Shamshad</strong></p><img
+                src="../public/icon-developer.png"
+                alt="Developer"
+                className="mini-avatar"
+              />
             </div>
             <p>© 2025 Powered by creativity and code.</p>
           </div>
