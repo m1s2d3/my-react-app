@@ -125,15 +125,6 @@ export default function App() {
       <button className="reset" onClick={resetGame}>
         {winner ? "Play Again" : "Reset Game"}
       </button>
-
-      <footer className="footer">
-        <p>Tap the icon below to add this game to your home screen.</p>
-        <img
-          src="/vite.svg"
-          alt="Add to Home Screen"
-          className="icon"
-        />
-      </footer>
     </div>
   );
 }
