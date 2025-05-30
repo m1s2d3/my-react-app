@@ -12,6 +12,7 @@ export default function App() {
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [mode, setMode] = useState("single");
+  const [showSplash, setShowSplash] = useState(true); // splash state
 
   const clickSound = useRef(new Audio(clickSoundFile));
   const clickSoundComp = useRef(new Audio(clickSoundCompFile));
@@ -25,21 +26,18 @@ export default function App() {
     [0, 4, 8], [2, 4, 6],
   ];
 
-  // Play start sound on first load
   useEffect(() => {
     startSound.current.play();
   }, []);
 
-  // Check winner after every board change
   useEffect(() => {
     checkWinner();
   }, [board]);
 
-  // Let computer move only when it's computer's turn and game not over
   useEffect(() => {
     if (mode === "single" && !isXNext && !winner && !gameOver) {
       const timeoutId = setTimeout(computerMove, 1000);
-      return () => clearTimeout(timeoutId); // Cleanup
+      return () => clearTimeout(timeoutId);
     }
   }, [isXNext, winner, gameOver, mode]);
 
@@ -100,6 +98,18 @@ export default function App() {
     </button>
   );
 
+  if (showSplash) {
+    return (
+      <div className="splash-screen">
+        <h1 className="splash-title">Tic Tac Toe</h1>
+        <p className="splash-subtitle">Let's play and have fun!</p>
+        <button className="splash-btn" onClick={() => setShowSplash(false)}>
+          Start Game
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <header className="header">
@@ -148,7 +158,7 @@ export default function App() {
         ))}
       </div>
 
-      <button className="reset" onClick={resetGame} title="Reset Game">
+      <button className="reset" onClick={resetGame}>
         Reset Game
       </button>
 
