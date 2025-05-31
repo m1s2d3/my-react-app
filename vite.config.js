@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon-192.png'], // or add favicon if needed
+      includeAssets: ['icon-192.png','win.png'], // or add favicon if needed
       manifest: {
         short_name: 'TicTacToe',
         name: 'Tic Tac Toe Game',
