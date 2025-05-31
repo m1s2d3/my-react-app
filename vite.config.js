@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon-192.png','win.png'], // or add favicon if needed
+      includeAssets: ['icon-192.png','win.png','lose.png','draw.png','icon-developer.png','app-icon.png'],
       manifest: {
         short_name: 'TicTacToe',
         name: 'Tic Tac Toe Game',
@@ -16,16 +16,6 @@ export default defineConfig({
             src: 'icon-192.png',
             type: 'image/png',
             sizes: '192x192',
-          },
-          {
-            "src": "icon-developer.png",
-            "type": "image/png",
-            "sizes": "192x192"
-          },
-          {
-            "src": "app-icon.png",
-            "type": "image/png",
-            "sizes": "192x192"
           }
         ],
         start_url: '.',
