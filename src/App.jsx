@@ -10,15 +10,16 @@ export default function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [winner, setWinner] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
   const [mode, setMode] = useState("single");
   const [showSplash, setShowSplash] = useState(true);
 
-  const clickSound = useRef(new Audio(clickSoundFile));
-  const clickSoundComp = useRef(new Audio(clickSoundCompFile));
-  const startSound = useRef(new Audio(startSoundFile));
-  const winSound = useRef(new Audio(winSoundFile));
-  const drawSound = useRef(new Audio(drawSoundFile));
+  const sounds = useRef({
+    click: new Audio(clickSoundFile),
+    compClick: new Audio(clickSoundCompFile),
+    start: new Audio(startSoundFile),
+    win: new Audio(winSoundFile),
+    draw: new Audio(drawSoundFile),
+  });
 
   const winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -31,15 +32,15 @@ export default function App() {
   }, [board]);
 
   useEffect(() => {
-    if (mode === "single" && !isXNext && !winner && !gameOver) {
+    if (mode === "single" && !isXNext && !winner) {
       const timeoutId = setTimeout(computerMove, 1000);
       return () => clearTimeout(timeoutId);
     }
-  }, [isXNext, winner, gameOver, mode]);
+  }, [isXNext, winner, mode]);
 
   const handleClick = (index) => {
-    clickSound.current.play();
     if (board[index] || winner || (mode === "single" && !isXNext)) return;
+    sounds.current.click.play();
     const newBoard = [...board];
     newBoard[index] = isXNext ? "X" : "O";
     setBoard(newBoard);
@@ -51,7 +52,7 @@ export default function App() {
       .map((val, idx) => (val === null ? idx : null))
       .filter((val) => val !== null);
     if (emptyIndices.length === 0) return;
-    clickSoundComp.current.play();
+    sounds.current.compClick.play();
     const randomIndex = Math.floor(Math.random() * emptyIndices.length);
     const newBoard = [...board];
     newBoard[emptyIndices[randomIndex]] = "O";
@@ -64,16 +65,13 @@ export default function App() {
       const [a, b, c] = combo;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
-        setGameOver(true);
-        winSound.current.play();
+        sounds.current.win.play();
         return;
       }
     }
-
     if (!board.includes(null)) {
       setWinner("Draw");
-      setGameOver(true);
-      drawSound.current.play();
+      sounds.current.draw.play();
     }
   };
 
@@ -81,7 +79,6 @@ export default function App() {
     setBoard(Array(9).fill(null));
     setIsXNext(true);
     setWinner(null);
-    setGameOver(false);
   };
 
   const renderCell = (index) => (
@@ -97,38 +94,32 @@ export default function App() {
   if (showSplash) {
     return (
       <div className="splash-screen">
-      <div className="splash-content">
-        <div className="text-section">
-          <h1 className="splash-title">Tic Tac Toe</h1><img
-            src="/app-icon.png"
-            alt="game-icon"
-            className="app-icon"
-          />
-          <p className="splash-subtitle">Let's play and have fun!</p>
+        <div className="splash-content">
+          <div className="text-section">
+            <h1 className="splash-title">Tic Tac Toe</h1>
+            <img src="app-icon.png" alt="game-icon" className="app-icon" />
+            <p className="splash-subtitle">Let's play and have fun!</p>
 
-          <button
-            className="splash-btn"
-            onClick={() => {
-              startSound.current.play().catch(() => {});
-              setShowSplash(false);
-            }}
-          >
-            Start Game
-          </button>
+            <button
+              className="splash-btn"
+              onClick={() => {
+                sounds.current.start.play().catch(() => {});
+                setShowSplash(false);
+              }}
+            >
+              Start Game
+            </button>
 
-          <div className="splash-footer">
-            <div className="created-by">
-              <p>Created by <strong>Mohd Shamshad</strong></p><img
-                src="/icon-developer.png"
-                alt="Developer"
-                className="mini-avatar"
-              />
+            <div className="splash-footer">
+              <div className="created-by">
+                <p>Created by <strong>Mohd Shamshad</strong></p>
+                <img src="icon-developer.png" alt="Developer" className="mini-avatar" />
+              </div>
+              <p>© 2025 Powered by creativity and code.</p>
             </div>
-            <p>© 2025 Powered by creativity and code.</p>
           </div>
         </div>
       </div>
-    </div>
     );
   }
 
@@ -184,10 +175,32 @@ export default function App() {
         Reset Game
       </button>
 
-      {gameOver && (
+      {winner && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>{winner === "Draw" ? "It's a Draw!" : `${winner} Wins! 🎉`}</h2>
+            <h2>
+              {winner === "Draw" ? (
+                <div className="modal-content-centered">
+                  <img src="/draw.png" alt="draw" className="app-icon" />
+                  It's a draw
+                </div>
+              ) : mode === "single" && winner === "O" ? (
+                <div className="modal-content-centered">
+                  <img src="/lose.png" alt="lose" className="app-icon" />
+                  You Lose! 😞
+                </div>
+              ) : mode === "single" && winner === "X" ? (
+                <div className="modal-content-centered">
+                  <img src="/win.png" alt="winner" className="app-icon" />
+                  You Win! 🎉
+                </div>
+              ) : (
+                <div className="modal-content-centered">
+                  <img src="/win.png" alt="winner" className="app-icon" />
+                  {winner} Wins! 🎉
+                </div>
+              )}
+            </h2>
             <button className="play" onClick={resetGame}>
               Play Again
             </button>
