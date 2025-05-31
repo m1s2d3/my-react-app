@@ -21,6 +21,11 @@ export default defineConfig({
             "src": "icon-developer.png",
             "type": "image/png",
             "sizes": "192x192"
+          },
+          {
+            "src": "app-icon.png",
+            "type": "image/png",
+            "sizes": "192x192"
           }
         ],
         start_url: '.',
